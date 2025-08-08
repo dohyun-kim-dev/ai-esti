@@ -6,6 +6,7 @@ import styled, { ThemeProvider, createGlobalStyle } from 'styled-components';
 import { lightTheme, darkTheme } from '@/styles/theme';
 import Icon from '@/components/ai-esti/Icon';
 import BottomInput from '@/components/ai-esti/BottomInput';
+import { useRouter } from 'next/navigation'; // useRouter 훅 임포트
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -16,7 +17,7 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const LayoutWrapper = styled.div`
-  padding-top: 80px;
+  padding-top: 0px;
   padding-bottom: calc(76px + env(safe-area-inset-bottom)); /* 인풋 높이(52px) + 패딩(24px) + 안전영역 */
   min-height: 100vh;
   background-color: ${({ theme }) => theme.body};
@@ -52,7 +53,7 @@ const TopNav = styled.nav`
     border-radius: 8px;
 
     &:hover {
-      background-color: ${({ theme }) => `${theme.accent}1A`};
+      background-color: ${({ theme }) => `${theme.body}`};
     }
   }
 `;
@@ -88,6 +89,7 @@ interface ChildWithThemeProps {
 
 export default function AiEstimateLayout({ children, inputPlaceholder, onInputSubmit }: AiEstimateLayoutProps) {
   const [themeMode, setThemeMode] = useState('dark');
+  const router = useRouter(); // useRouter 훅 사용
 
   const toggleTheme = () => {
     setThemeMode(themeMode === 'light' ? 'dark' : 'light');
@@ -104,13 +106,18 @@ export default function AiEstimateLayout({ children, inputPlaceholder, onInputSu
     profile: isLightTheme ? '/ai-estimate/profile.png' : '/ai-estimate/profile_dark.png',
   };
 
+  const handleBack = () => {
+    router.back();
+  };
+
   return (
     <ThemeProvider theme={currentTheme}>
       <GlobalStyle />
       <LayoutWrapper>
         <TopNav>
           <div className="left-icons">
-            <span className="icon">
+            {/* 뒤로 가기 아이콘 추가 */}
+            <span className="icon" onClick={handleBack}>
               <Icon src={icons.back} width={24} height={24} />
             </span>
           </div>

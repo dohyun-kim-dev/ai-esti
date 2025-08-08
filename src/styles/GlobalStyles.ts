@@ -1,35 +1,30 @@
-// src/styles/GlobalStyle.ts
+import { createGlobalStyle } from 'styled-components'
 
-/**
- * GlobalStyle은 애플리케이션의 전역 CSS 스타일을 정의합니다.
- * 초기화 스타일과 기본 레이아웃 설정을 통해 모든 페이지에 일관된 스타일을 적용합니다.
- *
- * GlobalStyle defines global CSS styles for the application.
- * It sets up base layout and resets to ensure consistent styling across all pages.
- */
-
-import { createGlobalStyle } from 'styled-components';
-import { AppColors } from './colors';
-const GlobalStyle = createGlobalStyle`
-  *, *::before, *::after {
-    box-sizing: border-box;
-  }
-  :root {
-    color-scheme: light;
-  }
-
-  html, body {
+export const GlobalStyle = createGlobalStyle`
+  * {
     margin: 0;
     padding: 0;
-    width: 100%;
-    height: 100%;
-    font-family: 'Noto Sans KR', sans-serif;
-
-    background-color: ${AppColors.background};      
-     /* background-color: #ffffff !important; */
-    color: ${AppColors.onBackground};               
-    color-scheme: only dark;                     
+    box-sizing: border-box;
   }
-`;
 
-export default GlobalStyle;
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+      Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: ${({ theme }) => theme.body};
+    color: ${({ theme }) => theme.text};
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font: inherit;
+    color: inherit;
+  }
+`

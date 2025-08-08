@@ -1,0 +1,22 @@
+{
+    "sourceFile": "src/app/layout.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1754549360981,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1754635915658,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,8 +8,9 @@\n import { GlobalStyle } from '@/styles/globalStyles'\n import Header from '@/components/common/Header'\n import Footer from '@/components/common/Footer'\n import styled from 'styled-components'\n+import { ToastProvider } from '@/components/common/ToastProvider'\n \n const inter = Inter({ subsets: ['latin'] })\n \n const Main = styled.main`\n@@ -30,11 +31,13 @@\n       <body className={inter.className}>\n         <StyledComponentsRegistry>\n           <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>\n             <GlobalStyle />\n-            <Header />\n-            <Main>{children}</Main>\n-            <Footer />\n+            <ToastProvider>\n+              <Header />\n+              <Main>{children}</Main>\n+              <Footer />\n+            </ToastProvider>\n           </ThemeProvider>\n         </StyledComponentsRegistry>\n       </body>\n     </html>\n"
+                }
+            ],
+            "date": 1754549360981,
+            "name": "Commit-0",
+            "content": "'use client'\n\nimport StyledComponentsRegistry from '@/lib/registry'\nimport { Inter } from 'next/font/google'\nimport { ThemeProvider } from 'styled-components'\nimport { useThemeStore } from '@/store/themeStore'\nimport { lightTheme, darkTheme } from '@/styles/theme'\nimport { GlobalStyle } from '@/styles/globalStyles'\nimport Header from '@/components/common/Header'\nimport Footer from '@/components/common/Footer'\nimport styled from 'styled-components'\n\nconst inter = Inter({ subsets: ['latin'] })\n\nconst Main = styled.main`\n  padding: 76px 0 84px;\n  min-height: 100vh;\n  background-color: ${({ theme }) => theme.body};\n`\n\nexport default function RootLayout({\n  children,\n}: {\n  children: React.ReactNode\n}) {\n  const { isDarkMode } = useThemeStore()\n\n  return (\n    <html lang=\"ko\">\n      <body className={inter.className}>\n        <StyledComponentsRegistry>\n          <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>\n            <GlobalStyle />\n            <Header />\n            <Main>{children}</Main>\n            <Footer />\n          </ThemeProvider>\n        </StyledComponentsRegistry>\n      </body>\n    </html>\n  )\n}"
+        }
+    ]
+}

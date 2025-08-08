@@ -83,6 +83,7 @@ const SideContent = styled.div`
   }
 `;
 
+
 import { EstimateItem } from './types';
 
 interface AiEstimatePageProps {
@@ -131,6 +132,8 @@ const AiEstimatePage: React.FC<AiEstimatePageProps> = () => {
                 <AnimatedContainer $isvisible={isDetailsVisible}>
                   <EstimateAccordion data={projectEstimate} onItemClick={handleItemClick} />
                 </AnimatedContainer>
+
+               
               </MainContent>
               <SideContent>
                 <EstimateActionButtons 

@@ -1,9 +1,11 @@
 "use client";
 
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { ProjectEstimate } from '../types';
 import Icon from './Icon';
+import Modal from '@/components/common/Modal';
+import { useToast } from '@/components/common/ToastProvider'
 
 const CardWrapper = styled.div`
   background-color: ${({ theme }) => theme.surface1};
@@ -107,11 +109,43 @@ const ActionButton = styled.button<{ primary?: boolean }>`
   }
 `;
 
+const ShareInput = styled.div`
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+
+  input {
+    flex: 1;
+    height: 44px;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+    background: #f9fafb;
+    color: #111827;
+    padding: 0 12px;
+  }
+
+  button {
+    height: 44px;
+    padding: 0 14px;
+    border-radius: 8px;
+    background: #2E2E48;
+    color: white;
+    font-size: 14px;
+font-style: normal;
+font-weight: 400;
+line-height: 160%;
+letter-spacing: 0.32px;
+  }
+`;
+
 interface EstimateCardProps {
   estimate: ProjectEstimate;
 }
 
 const EstimateCard: React.FC<EstimateCardProps> = ({ estimate }) => {
+  const [openShare, setOpenShare] = useState(false)
+  const { success } = useToast()
+
   // estimated_period가 '30주'와 같은 문자열일 경우를 가정하고 숫자만 추출합니다.
   const weekValue = parseInt(estimate.estimated_period);
 
@@ -122,13 +156,24 @@ const EstimateCard: React.FC<EstimateCardProps> = ({ estimate }) => {
   // 최종적으로 보여줄 기간 문자열을 생성합니다.
   const displayPeriod = `(약 ${monthValue}개월)`;
 
+  const shareUrl = typeof window !== 'undefined' ? window.location.href + `?estimate=${encodeURIComponent(estimate.project_name)}` : ''
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(shareUrl)
+      success('링크가 복사되었습니다.')
+    } catch {
+      // ignore
+    }
+  }
+
   return (
     <CardWrapper>
       <Header>
         <Flex>
         <Title>{estimate.project_name}</Title>
         <Right>
-        <span><Icon src={'/ai-estimate/share2_dark.png'} width={36} height={36} /></span>
+        <span><Icon onClick={() => setOpenShare(true)} src={'/ai-estimate/share2_dark.png'} width={36} height={36} /></span>
         <span><Icon src={'/ai-estimate/download_dark.png'} width={36} height={36} /></span>
         </Right>
 
@@ -148,6 +193,14 @@ const EstimateCard: React.FC<EstimateCardProps> = ({ estimate }) => {
           <ActionButton>AI 맞춤 추천</ActionButton>
         </ActionButtons>
       </Header>
+
+      <Modal open={openShare} title="견적서 공유" onClose={() => setOpenShare(false)} width={520}>
+        <div style={{ color: '#A1A1AA', fontSize: 14, marginBottom: 32 }}>공유받은 사용자는 견적 내용을 확인할 수 있습니다.</div>
+        <ShareInput>
+          <input readOnly value={shareUrl} placeholder="https://aigocorp.com/id..." />
+          <button onClick={handleCopy}>링크복사</button>
+        </ShareInput>
+      </Modal>
     </CardWrapper>
   );
 };

@@ -1,0 +1,22 @@
+{
+    "sourceFile": "src/store/themeStore.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1754549360980,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1754549921234,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,12 +8,12 @@\n \n export const useThemeStore = create<ThemeState>()(\n   persist(\n     (set) => ({\n-      isDarkMode: false,\n+      isDarkMode: true, // 기본값을 true로 변경\n       toggleTheme: () => set((state) => ({ isDarkMode: !state.isDarkMode })),\n     }),\n     {\n       name: 'theme-storage',\n     }\n   )\n-)\n+)\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1754549360980,
+            "name": "Commit-0",
+            "content": "import { create } from 'zustand'\nimport { persist } from 'zustand/middleware'\n\ninterface ThemeState {\n  isDarkMode: boolean\n  toggleTheme: () => void\n}\n\nexport const useThemeStore = create<ThemeState>()(\n  persist(\n    (set) => ({\n      isDarkMode: false,\n      toggleTheme: () => set((state) => ({ isDarkMode: !state.isDarkMode })),\n    }),\n    {\n      name: 'theme-storage',\n    }\n  )\n)\n"
+        }
+    ]
+}

@@ -21,6 +21,7 @@ width: 100%;
     max-width: 100vw;
     left: 50%;
     transform: translateX(-50%);
+    
   }
 `;
 
@@ -32,7 +33,7 @@ const InputContainer = styled.div`
   background-color: ${({ theme }) => theme.body};
   border-radius: 50px;
   border: 1px solid ${({ theme }) => theme.border};
-  width: 85%;
+  width: 100%;
   min-height: 56px;
   transition: min-height 0.2s ease-in-out;
   

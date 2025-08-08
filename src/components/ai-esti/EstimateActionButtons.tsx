@@ -1,10 +1,13 @@
 // src/app/ai-estimate/components/EstimateActionButtons.tsx
 "use client";
 
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { IoChevronForward } from 'react-icons/io5';
 import Icon from './Icon';
+import Modal from '@/components/common/Modal';
+import { useToast } from '@/components/common/ToastProvider'
+import TextField from '@/components/common/TextField'
 
 const ButtonsContainer = styled.div`
   display: flex;
@@ -56,10 +59,10 @@ const IconWrapper = styled.div`
   flex-shrink: 0;
 `;
 const Flex = styled.div`
-display:flex;
-align-items:center;
-gap:10px;
-`
+ display:flex;
+ align-items:center;
+ gap:10px;
+`;
 
 const TextContent = styled.div`
   display: flex;
@@ -131,6 +134,36 @@ const ActionButtonBottom = styled.div`
   }
 `;
 
+const Form = styled.form`
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  @media (min-width: 1024px) {
+    width: 85%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+`;
+
+const Disclaimer = styled.p`
+  margin-top: 4px;
+  font-size: 12px;
+  color: #666666;
+`;
+
+const SubmitButton = styled.button`
+  height: 44px;
+  border-radius: 8px;
+  background: #2E2E48;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  width: 80%;
+  align-self: center;
+`;
+
 interface EstimateActionButtonsProps {
   onConsult?: () => void;
   onAiEstimate?: () => void;
@@ -142,9 +175,18 @@ const EstimateActionButtons: React.FC<EstimateActionButtonsProps> = ({
   onAiEstimate,
   onAiOptimize
 }) => {
+  const [openConsult, setOpenConsult] = useState(false)
+  const { success } = useToast()
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    setOpenConsult(false)
+    success('문의가 접수되었습니다.')
+  }
+
   return (
     <ButtonsContainer>
-      <ActionButton onClick={onConsult}>
+      <ActionButton onClick={() => { setOpenConsult(true); onConsult?.() }}>
         <LeftContent>
           <TextContent>
           <Flex>
@@ -192,6 +234,17 @@ const EstimateActionButtons: React.FC<EstimateActionButtonsProps> = ({
           <ChevronIcon size={20} />
           <ActionButtonBottom>AI 맞춤추천</ActionButtonBottom>
         </ActionButton>
+
+        <Modal open={openConsult} title="필수 정보 입력" centerTitle onClose={() => setOpenConsult(false)} width={520}>
+          <div style={{ fontSize: 14, textAlign: 'center'}}>정확한 상담을 위해 필수 정보를 입력해주세요</div>
+          <Form onSubmit={handleSubmit}>
+            <TextField id="name" label="이름" placeholder="이름을 입력해주세요" required />
+            <TextField id="email" label="이메일" type="email" placeholder="이메일을 입력해주세요" required />
+            <TextField id="phone" label="전화번호" placeholder="전화번호를 입력해주세요" required />
+            <Disclaimer>문의 시 개인정보 수집·이용에 동의한 것으로 간주됩니다.</Disclaimer>
+            <SubmitButton type="submit">문의 접수</SubmitButton>
+          </Form>
+        </Modal>
     </ButtonsContainer>
   );
 };

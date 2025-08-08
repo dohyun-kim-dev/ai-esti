@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/components/common/TextField.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1754637885997,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1754637885997,
+            "name": "Commit-0",
+            "content": "\"use client\"\n\nimport React from 'react'\nimport styled from 'styled-components'\n\ninterface TextFieldProps extends React.InputHTMLAttributes<HTMLInputElement> {\n  id: string\n  label: string\n}\n\nconst Field = styled.div`\n  position: relative;\n`\n\nconst FloatingLabel = styled.label`\n  position: absolute;\n  top: -10px;\n  left: 12px;\n  margin-top: 3px;\n  padding: 0 4px;\n  font-size: 12px;\n  color: #666666;\n  background: #ffffff;\n`\n\nconst StyledInput = styled.input`\n  height: 56px;\n  width: 100%;\n  border-radius: 4px;\n  border: 1px solid #e5e7eb;\n  background: #ffffff; /* 라이트/다크 모드와 무관하게 화이트 고정 */\n  color: #111827;\n  padding: 0 14px;\n  font-size: 14px;\n  transition: border-color 0.2s ease, box-shadow 0.2s ease;\n\n  &::placeholder {\n    color: #666666;\n    opacity: 0.6;\n  }\n\n  &:focus {\n    outline: none;\n    border-color: #3391FF;\n    box-shadow: 0 0 0 2px rgba(51, 145, 255, 0.12);\n  }\n`\n\nexport default function TextField({ id, label, ...props }: TextFieldProps) {\n  return (\n    <Field>\n      <FloatingLabel htmlFor={id}>{label}</FloatingLabel>\n      <StyledInput id={id} {...props} />\n    </Field>\n  )\n}\n"
+        }
+    ]
+}
