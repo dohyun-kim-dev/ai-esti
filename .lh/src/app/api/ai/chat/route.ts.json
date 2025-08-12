@@ -1,0 +1,22 @@
+{
+    "sourceFile": "src/app/api/ai/chat/route.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1754878815893,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1754880572390,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n \n export async function POST(req: NextRequest) {\n   try {\n     const { prompt, messages, model = 'gemini-2.0-flash' } = await req.json()\n-    const apiKey = | process.env.NEXT_PUBLIC_GEMINI_API_KEY\n+    const apiKey =  process.env.NEXT_PUBLIC_GEMINI_API_KEY\n     if (!apiKey) {\n       return NextResponse.json({ error: 'Missing GEMINI_API_KEY' }, { status: 500 })\n     }\n \n"
+                }
+            ],
+            "date": 1754878815892,
+            "name": "Commit-0",
+            "content": "import { NextRequest, NextResponse } from 'next/server'\nimport { GoogleGenerativeAI } from '@google/generative-ai'\n\nexport async function POST(req: NextRequest) {\n  try {\n    const { prompt, messages, model = 'gemini-2.0-flash' } = await req.json()\n    const apiKey = process.env.GEMINI_API_KEY || process.env.NEXT_PUBLIC_GEMINI_API_KEY\n    if (!apiKey) {\n      return NextResponse.json({ error: 'Missing GEMINI_API_KEY' }, { status: 500 })\n    }\n\n    const genAI = new GoogleGenerativeAI(apiKey)\n    const genModel = genAI.getGenerativeModel({ model })\n\n    let textPrompt = prompt as string | undefined\n    if (!textPrompt && Array.isArray(messages) && messages.length > 0) {\n      const last = messages[messages.length - 1]\n      textPrompt = last?.content || ''\n    }\n\n    if (!textPrompt) {\n      return NextResponse.json({ reply: '' })\n    }\n\n    const result = await genModel.generateContent(textPrompt)\n    const reply = result.response.text()\n\n    return NextResponse.json({ reply })\n  } catch (e: any) {\n    return NextResponse.json({ error: e?.message || 'Unknown error' }, { status: 500 })\n  }\n}\n"
+        }
+    ]
+}
