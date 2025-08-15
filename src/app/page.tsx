@@ -3,10 +3,9 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useRouter } from 'next/navigation'
-import LanguageSelector from '@/components/common/LanguageSelector'
 
 const Container = styled.div`
-  min-height: 100vh;
+  min-height: 78vh;
   display: flex;
   flex-direction: column;
   justify-content: center;

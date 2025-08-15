@@ -1,0 +1,22 @@
+{
+    "sourceFile": "src/contexts/DeviceContext.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1755074804505,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1755074826435,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,18 +16,18 @@\n       const width = window.innerWidth;\n       const ua = navigator.userAgent || navigator.vendor || (window as any).opera;\n       const isSmallScreen = window.matchMedia(`(max-width: ${Breakpoints.mobile}px)`).matches;\n \n-      // console.log(\"📱 Device Detection Log:\");\n-      // console.log(\"📏 window.innerWidth:\", width);\n-      // console.log(\"🧭 userAgent:\", ua);\n-      // console.log(\"📐 matchMedia:\", isSmallScreen);\n+      console.log(\"📱 Device Detection Log:\");\n+      console.log(\"📏 window.innerWidth:\", width);\n+      console.log(\"🧭 userAgent:\", ua);\n+      console.log(\"📐 matchMedia:\", isSmallScreen);\n \n       if (isSmallScreen) {\n         console.log(\"✅ Set device: mobile\");\n         setDevice('mobile');\n       } else {\n-        // console.log(\"✅ Set device: desktop\");\n+        console.log(\"✅ Set device: desktop\");\n         setDevice('desktop');\n       }\n     };\n \n"
+                }
+            ],
+            "date": 1755074804505,
+            "name": "Commit-0",
+            "content": "'use client';\n\nimport React, { createContext, useContext, useEffect, useState } from 'react';\nimport { Breakpoints } from '@/constants/layoutConstants';\n\ntype SimplifiedDeviceType = 'mobile' | 'desktop';\n\nconst DeviceContext = createContext<SimplifiedDeviceType>('desktop');\nexport const useDevice = () => useContext(DeviceContext);\n\nexport const DeviceProvider = ({ children }: { children: React.ReactNode }) => {\n  const [device, setDevice] = useState<SimplifiedDeviceType>('desktop');\n\n  useEffect(() => {\n    const detectDevice = () => {\n      const width = window.innerWidth;\n      const ua = navigator.userAgent || navigator.vendor || (window as any).opera;\n      const isSmallScreen = window.matchMedia(`(max-width: ${Breakpoints.mobile}px)`).matches;\n\n      // console.log(\"📱 Device Detection Log:\");\n      // console.log(\"📏 window.innerWidth:\", width);\n      // console.log(\"🧭 userAgent:\", ua);\n      // console.log(\"📐 matchMedia:\", isSmallScreen);\n\n      if (isSmallScreen) {\n        console.log(\"✅ Set device: mobile\");\n        setDevice('mobile');\n      } else {\n        // console.log(\"✅ Set device: desktop\");\n        setDevice('desktop');\n      }\n    };\n\n    detectDevice(); // 초기 체크\n    window.addEventListener('resize', detectDevice);\n    return () => window.removeEventListener('resize', detectDevice);\n  }, []);\n\n  return <DeviceContext.Provider value={device}>{children}</DeviceContext.Provider>;\n};\n"
+        }
+    ]
+}

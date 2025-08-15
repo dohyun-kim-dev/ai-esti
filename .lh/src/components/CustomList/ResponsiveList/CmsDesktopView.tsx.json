@@ -1,0 +1,38 @@
+{
+    "sourceFile": "src/components/CustomList/ResponsiveList/CmsDesktopView.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 5,
+            "patches": [
+                {
+                    "date": 1755137776609,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1755137803123,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -58,9 +58,9 @@\n       columns={columns}\n       fetchData={handleFetchData}\n       themeMode={themeMode}\n       enableDateFilter={false}\n-      addButton={onAdd ? { label: \" 관리자 등록\", onClick: onAdd } : undefined}\n+      addButtonLabel={onAdd ? \"관리자 등록\" : undefined}\n       onRowClick={onRowClick}\n     />\n   );\n }\n"
+                },
+                {
+                    "date": 1755137822813,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -58,8 +58,9 @@\n       columns={columns}\n       fetchData={handleFetchData}\n       themeMode={themeMode}\n       enableDateFilter={false}\n+      onAdd\n       addButtonLabel={onAdd ? \"관리자 등록\" : undefined}\n       onRowClick={onRowClick}\n     />\n   );\n"
+                },
+                {
+                    "date": 1755137828520,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -58,9 +58,9 @@\n       columns={columns}\n       fetchData={handleFetchData}\n       themeMode={themeMode}\n       enableDateFilter={false}\n-      onAdd\n+      \n       addButtonLabel={onAdd ? \"관리자 등록\" : undefined}\n       onRowClick={onRowClick}\n     />\n   );\n"
+                },
+                {
+                    "date": 1755137839591,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -58,10 +58,9 @@\n       columns={columns}\n       fetchData={handleFetchData}\n       themeMode={themeMode}\n       enableDateFilter={false}\n-      \n-      addButtonLabel={onAdd ? \"관리자 등록\" : undefined}\n+      addButton={onAdd ? { label: \" 관리자 등록\", onClick: onAdd } : undefined}\n       onRowClick={onRowClick}\n     />\n   );\n }\n"
+                },
+                {
+                    "date": 1755138482143,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,8 +16,9 @@\n   data: T[];\n   columns: ColumnDefinition<T>[];\n   onRowClick?: (item: T) => void;\n   onAdd?: () => void;\n+  addButtonLabel?: string;\n   onExport?: () => void;\n   isLoading?: boolean;\n   fetchData?: () => Promise<{ data: T[]; totalItems: number; allItems: number; }>;\n   themeMode?: \"light\" | \"dark\";\n@@ -30,8 +31,9 @@\n   data,\n   columns,\n   onRowClick,\n   onAdd,\n+  addButtonLabel,\n   onExport,\n   isLoading = false,\n   fetchData,\n   themeMode = \"light\"\n@@ -58,9 +60,10 @@\n       columns={columns}\n       fetchData={handleFetchData}\n       themeMode={themeMode}\n       enableDateFilter={false}\n-      addButton={onAdd ? { label: \" 관리자 등록\", onClick: onAdd } : undefined}\n+      onAdd={onAdd}\n+      addButtonLabel={addButtonLabel}\n       onRowClick={onRowClick}\n     />\n   );\n }\n"
+                }
+            ],
+            "date": 1755137776609,
+            "name": "Commit-0",
+            "content": "\"use client\";\n\nimport React, { useRef } from \"react\";\nimport GenericListUI, { FetchParams } from \"@/components/CustomList/GenericListUI\";\nimport { ColumnDefinition } from \"@/components/CustomList/GenericDataTable\";\n\n// BaseRecord 타입 정의\ninterface BaseRecord {\n  id?: string | number;\n  index?: number;\n  [key: string]: any;\n}\n\ninterface CmsDesktopViewProps<T extends BaseRecord> {\n  title: string;\n  data: T[];\n  columns: ColumnDefinition<T>[];\n  onRowClick?: (item: T) => void;\n  onAdd?: () => void;\n  onExport?: () => void;\n  isLoading?: boolean;\n  fetchData?: () => Promise<{ data: T[]; totalItems: number; allItems: number; }>;\n  themeMode?: \"light\" | \"dark\";\n  compactFieldCount?: number; // 모바일용이지만 props 통일을 위해\n  defaultViewMode?: 'detail' | 'compact' | 'large'; // 모바일용이지만 props 통일을 위해\n}\n\nexport default function CmsDesktopView<T extends BaseRecord>({\n  title,\n  data,\n  columns,\n  onRowClick,\n  onAdd,\n  onExport,\n  isLoading = false,\n  fetchData,\n  themeMode = \"light\"\n}: CmsDesktopViewProps<T>) {\n  const listRef = useRef<{ refetch: () => void } | null>(null);\n\n  const handleFetchData = async (params: FetchParams) => {\n    if (fetchData) {\n      return await fetchData();\n    }\n    // 기본 더미 데이터 반환\n    return {\n      data,\n      totalItems: data.length,\n      allItems: data.length,\n    };\n  };\n\n  return (\n    <GenericListUI<T>\n      ref={listRef}\n      title={title}\n      excelFileName=\"데이터 목록\"\n      columns={columns}\n      fetchData={handleFetchData}\n      themeMode={themeMode}\n      enableDateFilter={false}\n      addButton={onAdd ? { label: \" 관리자 등록\", onClick: onAdd } : undefined}\n      onRowClick={onRowClick}\n    />\n  );\n}\n"
+        }
+    ]
+}

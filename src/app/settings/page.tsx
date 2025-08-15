@@ -71,10 +71,9 @@ const MenuItem = styled.div`
   display: flex;
   align-items: center;
   padding: 16px;
-  background-color: ${({ theme }) => theme.surface1};
+  background-color: ${({ theme }) => theme.surface3};
   border-radius: 4px;
   cursor: pointer;
-  margin-bottom: 2px;
 
   &:hover {
     background-color: ${({ theme }) => theme.surface2};

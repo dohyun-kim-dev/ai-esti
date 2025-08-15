@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import Icon from '@/components/ai-esti/Icon';
 import { useRouter } from 'next/navigation';
 import { useThemeStore } from '@/store/themeStore';
+import BottomInput from '@/components/ai-esti/BottomInput';
 
 const LayoutWrapper = styled.div`
   padding-top: 0px;
@@ -77,7 +78,7 @@ interface ChildWithThemeProps {
   themeMode?: 'light' | 'dark';
 }
 
-export default function AiEstimateLayout({ children }: AiEstimateLayoutProps) {
+export default function AiEstimateLayout({ children, inputPlaceholder, onInputSubmit }: AiEstimateLayoutProps) {
   const router = useRouter();
   const { isDarkMode, toggleTheme } = useThemeStore();
 
@@ -119,6 +120,11 @@ export default function AiEstimateLayout({ children }: AiEstimateLayoutProps) {
       <ThemeToggleButton onClick={toggleTheme}>
         {isDarkMode ? '☀️' : '🌙'}
       </ThemeToggleButton>
+      <BottomInput 
+          placeholder={inputPlaceholder} 
+          onSubmit={onInputSubmit}
+          embedded
+        />
     </LayoutWrapper>
   );
 }

@@ -1,0 +1,18 @@
+{
+    "sourceFile": "package.json",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1755170097223,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1755170097223,
+            "name": "Commit-0",
+            "content": "{\n  \"name\": \"ai-esti\",\n  \"version\": \"0.1.0\",\n  \"private\": true,\n  \"scripts\": {\n    \"dev\": \"next dev --hostname 0.0.0.0\",\n    \"build\": \"next build && next-sitemap\",\n    \"start\": \"next start\",\n    \"lint\": \"next lint\"\n  },\n  \"dependencies\": {\n    \"@emotion/react\": \"^11.14.0\",\n    \"@emotion/styled\": \"^11.14.0\",\n    \"@fortawesome/fontawesome-svg-core\": \"^6.7.2\",\n    \"@fortawesome/free-solid-svg-icons\": \"^6.7.2\",\n    \"@fortawesome/react-fontawesome\": \"^0.2.2\",\n    \"@google/generative-ai\": \"^0.24.0\",\n    \"@mui/icons-material\": \"^7.0.2\",\n    \"@mui/material\": \"^7.0.2\",\n    \"@nivo/bar\": \"^0.96.0\",\n    \"@nivo/line\": \"^0.96.0\",\n    \"@nivo/pie\": \"^0.96.0\",\n    \"@radix-ui/react-select\": \"^2.1.7\",\n    \"@react-oauth/google\": \"^0.12.2\",\n    \n    \"@supabase/supabase-js\": \"^2.49.4\",\n    \n    \n    \"axios\": \"^1.9.0\",\n    \"clsx\": \"^2.1.1\",\n    \"date-fns\": \"^4.1.0\",\n    \"dayjs\": \"^1.11.13\",\n    \"firebase\": \"^11.6.1\",\n    \"framer-motion\": \"^12.7.4\",\n    \"gsap\": \"^3.12.7\",\n    \"html2canvas\": \"^1.4.1\",\n    \"i18next\": \"^25.2.0\",\n    \"jspdf\": \"^3.0.1\",\n    \"lucide-react\": \"^0.501.0\",\n    \"next\": \"15.2.4\",\n    \"next-auth\": \"^4.24.11\",\n    \"next-sitemap\": \"^4.2.3\",\n    \"react\": \"^19.0.0\",\n    \"react-datepicker\": \"^8.3.0\",\n    \"react-dom\": \"^19.0.0\",\n    \"react-i18next\": \"^15.5.1\",\n    \"react-icons\": \"^5.5.0\",\n    \"react-markdown\": \"^10.1.0\",\n    \"react-responsive\": \"^10.0.1\",\n    \"react-swipeable\": \"^7.0.2\",\n    \"react-textarea-autosize\": \"^8.5.9\",\n    \"react-toastify\": \"^11.0.5\",\n    \"rehype-raw\": \"^7.0.0\",\n    \"remark-gfm\": \"^4.0.1\",\n    \"styled-components\": \"^6.1.17\",\n    \"swr\": \"^2.3.3\",\n    \n    \n    \"uuid\": \"^11.1.0\",\n    \"xlsx\": \"^0.18.5\",\n    \"zustand\": \"^5.0.3\"\n  },\n  \"devDependencies\": {\n    \"@eslint/eslintrc\": \"^3\",\n    \n    \"@types/node\": \"^20\",\n    \"@types/react\": \"^19\",\n    \"@types/react-dom\": \"^19\",\n    \"eslint\": \"^9\",\n    \"eslint-config-next\": \"15.4.6\",\n    \n    \"typescript\": \"^5\"\n  }\n}\n"
+        }
+    ]
+}

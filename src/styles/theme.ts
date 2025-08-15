@@ -4,6 +4,7 @@ export const lightTheme = {
   body: '#FFFFFF', // 가장 바깥 배경
   surface1: '#F0F4F9', // 컴포넌트 배경
   surface2: '#F7F7F7', // 헤더 등 강조 영역 배경
+  surface3: '#FFFFFF', // 헤더 등 강조 영역 배경
   
   // 텍스트 및 기타 색상
   text: '#171B23', // 기본 텍스트
@@ -29,6 +30,7 @@ export const darkTheme = {
   body: '#08080F', // 가장 바깥 배경
   surface1: '#1F2937', // 컴포넌트 배경
   surface2: '#171B23', // 헤더 등 강조 영역 배경
+  surface3: '#1E212D', // 헤더 등 강조 영역 배경
   track: '#374151', // 슬라이더 트랙
   // 텍스트 및 기타 색상
   text: '#F8F8F8', // 기본 텍스트

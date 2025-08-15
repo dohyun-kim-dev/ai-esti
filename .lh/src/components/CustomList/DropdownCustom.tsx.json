@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/components/CustomList/DropdownCustom.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1755144530267,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1755144530267,
+            "name": "Commit-0",
+            "content": "import { useState } from \"react\";\nimport styled from \"styled-components\";\nimport { FaChevronDown } from \"react-icons/fa\";\nimport { ThemeMode } from \"@/styles/theme_colors\";\n\ntype DropdownProps = {\n  value: number;\n  onChange: (value: number) => void;\n  options: number[];\n  setCurrentPage?: React.Dispatch<React.SetStateAction<number>>;\n  themeMode?: ThemeMode;\n  triggerIcon?: React.ReactNode | null; // ✅ 아이콘 추가\n};\n\nconst DropdownCustom: React.FC<DropdownProps> = ({\n  value,\n  onChange,\n  options,\n  setCurrentPage,\n  themeMode = \"light\",\n  triggerIcon,\n}) => {\n  const [isOpen, setIsOpen] = useState(false);\n\n  return (\n    <DropdownContainer>\n      <DropdownHeader onClick={() => setIsOpen(!isOpen)} $themeMode={themeMode}>\n        {triggerIcon ?? value}\n        <MarginTop>\n          <FaChevronDown />\n        </MarginTop>\n      </DropdownHeader>\n\n      {isOpen && (\n        <DropdownList $themeMode={themeMode}>\n          {options.map((option) => (\n            <DropdownItem\n              key={option}\n              onClick={() => {\n                onChange(option);\n                setIsOpen(false);\n                if (setCurrentPage) setCurrentPage(1);\n              }}\n              $themeMode={themeMode}\n            >\n              {option}\n            </DropdownItem>\n          ))}\n        </DropdownList>\n      )}\n    </DropdownContainer>\n  );\n};\n\nexport default DropdownCustom;\n\n// 스타일 그대로 사용\nconst DropdownContainer = styled.div`\n  position: relative;\n  width: 100px;\n  font-family: \"Pretendard Variable\", sans-serif;\n`;\n\nconst MarginTop = styled.div`\n  margin-top: 8px;\n`;\n\nconst DropdownHeader = styled.div<{ $themeMode: ThemeMode }>`\n  width: 88%;\n  height: 28px;\n  padding: 5px;\n  border: none;\n  background-color: ${({ $themeMode }) => ($themeMode === \"light\" ? \"white\" : \"#333544\")};\n  color: ${({ $themeMode }) => ($themeMode === \"light\" ? \"#000000\" : \"#FFFFFF\")};\n  font-size: 16px;\n  text-align: center;\n  cursor: pointer;\n  border-radius: 0;\n  user-select: none;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  gap: 20px;\n\n  &:hover {\n    background-color: ${({ $themeMode }) => ($themeMode === \"light\" ? \"#f0f0f0\" : \"#424451\")};\n  }\n`;\n\nconst DropdownList = styled.ul<{ $themeMode: ThemeMode }>`\n  position: absolute;\n  width: 89%;\n  background-color: ${({ $themeMode }) => ($themeMode === \"light\" ? \"white\" : \"#333544\")};\n  border: 1px solid ${({ $themeMode }) => ($themeMode === \"light\" ? \"#ccc\" : \"#424451\")};\n  border-top: none;\n  list-style: none;\n  padding: 0;\n  margin: 0;\n  z-index: 10;\n`;\n\nconst DropdownItem = styled.li<{ $themeMode: ThemeMode }>`\n  padding: 8px;\n  font-size: 16px;\n  cursor: pointer;\n  border-radius: 0;\n  color: ${({ $themeMode }) => ($themeMode === \"light\" ? \"#000000\" : \"#FFFFFF\")};\n\n  &:hover {\n    background-color: ${({ $themeMode }) => ($themeMode === \"light\" ? \"#e0e0e0\" : \"#424451\")};\n  }\n`;\n"
+        }
+    ]
+}

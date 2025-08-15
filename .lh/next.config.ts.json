@@ -1,0 +1,22 @@
+{
+    "sourceFile": "next.config.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1755132897660,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1755241008260,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,7 +11,19 @@\n       transpileTemplateLiterals: true,\n       topLevelImportPaths: [\"styled-components\"],\n     },\n   },\n+  // Add webpack config to optimize bundle size\n+  webpack: (config, { dev, isServer }) => {\n+    // Production optimizations only\n+    if (!dev && !isServer) {\n+      // Enable tree shaking for MUI icons\n+      config.resolve.alias = {\n+        ...config.resolve.alias,\n+        '@mui/icons-material': '@mui/icons-material/esm',\n+      };\n+    }\n+    return config;\n+  },\n };\n \n-export default nextConfig;\n+export default nextConfig;\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1755132897660,
+            "name": "Commit-0",
+            "content": "import type { NextConfig } from \"next\";\n\nconst nextConfig: NextConfig = {\n  compiler: {\n    styledComponents: {\n      ssr: true,\n      displayName: true,\n      fileName: true,\n      meaninglessFileNames: [\"index\"],\n      pure: true,\n      transpileTemplateLiterals: true,\n      topLevelImportPaths: [\"styled-components\"],\n    },\n  },\n};\n\nexport default nextConfig;\n"
+        }
+    ]
+}

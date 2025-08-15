@@ -1,0 +1,18 @@
+{
+    "sourceFile": "public/icon.png",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1755241006289,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1755241006289,
+            "name": "Commit-0",
+            "content": "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAABYUlEQVQ4jZ2TvUoDQRSFv9nd2U02u9lNNomJGn+wELGxsLATbH0EX8FawUfwHXwB38FObQQRCxsrQbCxEEU0YozG/O3u2M1GDYkR8sEwc+aeM/fOnTvwz6EkSaIkSaIkSaLfbP8cYpqmEgwGxTAMxTAMxbZtxbZtxTRNxTAMxbIsxbIsxTRNxTAMxbZtxbZtxTAMxTRNJRgMKkmS/AxQVVUJhUKK4ziKbduKZVmKZVmKbduK4ziKbduKbduK4ziK4ziKbduKZVmKbduK4ziKZVmKbduK4zhKKBRSVVX9CmiaRiwWIxQK4fs+QRDgeR6e5xEEAUEQ4Ps+QRDg+z6+7+P7Pp7nEQQBQRDgeR6+7xMEAaFQiFgshmma3wGGYZBMJonH43ieh+/7BEHwFtfzPHzfx/M8PM/D8zyCIMD3fYIgwPd9PM8jHo+TTCYxDOPrgaqqZLNZcrkcjuPgOA75fJ58Po/jODiOQy6XI5vNoqrq9wv+ZTwDDxwFL7KFPYUAAAAASUVORK5CYII=\n"
+        }
+    ]
+}
