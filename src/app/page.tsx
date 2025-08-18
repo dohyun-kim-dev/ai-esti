@@ -84,6 +84,9 @@ export default function Home() {
       <CTAButton onClick={() => router.push('/ai-estimate')}>
         AI 견적서 받아보기
       </CTAButton>
+      <CTAButton onClick={() => router.push('/ai')}>
+        테스트
+      </CTAButton>
     </Container>
   )
 }

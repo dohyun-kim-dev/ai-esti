@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/components/ai-esti/PromptSelector.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1755246693016,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1755246693015,
+            "name": "Commit-0",
+            "content": "\"use client\";\n\nimport React from 'react';\nimport styled from 'styled-components';\nimport { PromptTemplate } from '@/ai/promptTemplates';\n\nconst SelectorWrapper = styled.div`\n  display: flex;\n  gap: 8px;\n  align-items: center;\n`;\n\nconst Select = styled.select`\n  height: 36px;\n  border: 1px solid ${({ theme }) => theme.border};\n  background: ${({ theme }) => theme.body};\n  color: ${({ theme }) => theme.text};\n  border-radius: 8px;\n  padding: 0 8px;\n  min-width: 200px;\n`;\n\ninterface PromptSelectorProps {\n  templates: PromptTemplate[];\n  selectedId: string;\n  onSelect: (templateId: string) => void;\n}\n\nconst PromptSelector: React.FC<PromptSelectorProps> = ({\n  templates,\n  selectedId,\n  onSelect,\n}) => {\n  return (\n    <SelectorWrapper>\n      <Select\n        value={selectedId}\n        onChange={(e) => onSelect(e.target.value)}\n      >\n        {templates.map((template) => (\n          <option key={template.id} value={template.id}>\n            {template.title}\n          </option>\n        ))}\n      </Select>\n    </SelectorWrapper>\n  );\n};\n\nexport default PromptSelector;\n"
+        }
+    ]
+}

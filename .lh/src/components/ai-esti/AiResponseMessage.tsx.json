@@ -1,0 +1,78 @@
+{
+    "sourceFile": "src/components/ai-esti/AiResponseMessage.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 15,
+            "patches": [
+                {
+                    "date": 1755245290668,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1755478958089,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -56,9 +56,9 @@\n   className\n }) => {\n   return (\n     <MessageWrapper className={className}>\n-      <ProfileImage src={profileImage} alt={name} />\n+      <ProfileImage ={profileImage} alt={name} />\n       <ContentWrapper>\n         <Header>\n           <h2>{name}</h2>\n         </Header>\n"
+                },
+                {
+                    "date": 1755479001993,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,8 +21,9 @@\n   flex: 1;\n `;\n \n const Header = styled.div`\n+display:flex\n   h2 {\n     font-size: 18px;\n     font-weight: 500;\n     line-height: 160%;\n"
+                },
+                {
+                    "date": 1755479036774,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,9 +21,9 @@\n   flex: 1;\n `;\n \n const Header = styled.div`\n-display:flex\n+  display:flex;\n   h2 {\n     font-size: 18px;\n     font-weight: 500;\n     line-height: 160%;\n@@ -57,11 +57,11 @@\n   className\n }) => {\n   return (\n     <MessageWrapper className={className}>\n-      <ProfileImage ={profileImage} alt={name} />\n       <ContentWrapper>\n         <Header>\n+        <ProfileImage src={profileImage} alt={name} />\n           <h2>{name}</h2>\n         </Header>\n         <MessageContent>\n           {typeof content === 'string' ? <p>{content}</p> : content}\n"
+                },
+                {
+                    "date": 1755479058182,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,9 @@\n   h2 {\n     font-size: 18px;\n     font-weight: 500;\n     line-height: 160%;\n-    margin: 0 0 5px 0;\n+    margin: 0 0 0px 0;\n     color: ${({ theme }) => theme.text};\n   }\n `;\n \n"
+                },
+                {
+                    "date": 1755479080481,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,9 @@\n   h2 {\n     font-size: 18px;\n     font-weight: 500;\n     line-height: 160%;\n-    margin: 0 0 0px 0;\n+    margin: 0 0 5px 0;\n     color: ${({ theme }) => theme.text};\n   }\n `;\n \n"
+                },
+                {
+                    "date": 1755479095472,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,8 +22,10 @@\n `;\n \n const Header = styled.div`\n   display:flex;\n+  gap:4px;\n+  \n   h2 {\n     font-size: 18px;\n     font-weight: 500;\n     line-height: 160%;\n"
+                },
+                {
+                    "date": 1755479113523,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,9 +28,9 @@\n   h2 {\n     font-size: 18px;\n     font-weight: 500;\n     line-height: 160%;\n-    margin: 0 0 5px 0;\n+    margin: 8 0 5px 0;\n     color: ${({ theme }) => theme.text};\n   }\n `;\n \n"
+                },
+                {
+                    "date": 1755479131531,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,15 +22,15 @@\n `;\n \n const Header = styled.div`\n   display:flex;\n-  gap:4px;\n-  \n+  gap: 8px;\n+\n   h2 {\n     font-size: 18px;\n     font-weight: 500;\n     line-height: 160%;\n-    margin: 8 0 5px 0;\n+    margin: 4px 0 4px 0;\n     color: ${({ theme }) => theme.text};\n   }\n `;\n \n"
+                },
+                {
+                    "date": 1755479166396,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,8 +23,9 @@\n \n const Header = styled.div`\n   display:flex;\n   gap: 8px;\n+  margin-bottom: 4px;\n \n   h2 {\n     font-size: 18px;\n     font-weight: 500;\n"
+                },
+                {
+                    "date": 1755480125830,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,16 +8,32 @@\n   gap: 15px;\n   padding: 12px 0;\n   max-width: 800px;\n `;\n-\n-const ProfileImage = styled.img`\n+const ProfileImage = styled.img<{ 'data-is-loading'?: boolean }>`\n   width: 40px;\n   height: 40px;\n   border-radius: 50%;\n   object-fit: cover;\n+  position: relative;\n+  z-index: 1;\n+\n+  ${props => props['data-is-loading'] && `\n+    &::before {\n+      content: '';\n+      position: absolute;\n+      top: -2px;\n+      left: -2px;\n+      right: -2px;\n+      bottom: -2px;\n+      border: 2px solid transparent;\n+      border-top-color: #3498db; // 로딩 바 색상\n+      border-radius: 50%;\n+      animation: ${spin} 1s linear infinite;\n+      z-index: -1;\n+    }\n+  `}\n `;\n-\n const ContentWrapper = styled.div`\n   flex: 1;\n `;\n \n"
+                },
+                {
+                    "date": 1755480158453,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,8 +8,14 @@\n   gap: 15px;\n   padding: 12px 0;\n   max-width: 800px;\n `;\n+\n+const spin = keyframes`\n+  0% { transform: rotate(0deg); }\n+  100% { transform: rotate(360deg); }\n+`;\n+\n const ProfileImage = styled.img<{ 'data-is-loading'?: boolean }>`\n   width: 40px;\n   height: 40px;\n   border-radius: 50%;\n@@ -32,8 +38,10 @@\n       z-index: -1;\n     }\n   `}\n `;\n+\n+\n const ContentWrapper = styled.div`\n   flex: 1;\n `;\n \n"
+                },
+                {
+                    "date": 1755480185963,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -78,8 +78,15 @@\n   name = \"AI 컨설턴트\",\n   content,\n   className\n }) => {\n+\n+\n+const spin = keyframes`\n+0% { transform: rotate(0deg); }\n+100% { transform: rotate(360deg); }\n+`;\n+\n   return (\n     <MessageWrapper className={className}>\n       <ContentWrapper>\n         <Header>\n"
+                },
+                {
+                    "date": 1755480238801,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,20 +1,16 @@\n \"use client\";\n \n import React from 'react';\n-import styled from 'styled-components';\n+import styled, { keyframes } from 'styled-components';\n \n const MessageWrapper = styled.div`\n   display: flex;\n   gap: 15px;\n   padding: 12px 0;\n   max-width: 800px;\n `;\n \n-const spin = keyframes`\n-  0% { transform: rotate(0deg); }\n-  100% { transform: rotate(360deg); }\n-`;\n \n const ProfileImage = styled.img<{ 'data-is-loading'?: boolean }>`\n   width: 40px;\n   height: 40px;\n@@ -83,9 +79,8 @@\n   content,\n   className\n }) => {\n \n-\n const spin = keyframes`\n 0% { transform: rotate(0deg); }\n 100% { transform: rotate(360deg); }\n `;\n"
+                },
+                {
+                    "date": 1755480273641,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -70,15 +70,17 @@\n   profileImage?: string;\n   name?: string;\n   content: string | React.ReactNode;\n   className?: string;\n+  isLoading?: boolean;\n }\n \n const AiResponseMessage: React.FC<AiResponseMessageProps> = ({\n   profileImage = \"/ai-estimate/pretty.png\",\n   name = \"AI 컨설턴트\",\n   content,\n-  className\n+  className,\n+  isLoading = false\n }) => {\n \n const spin = keyframes`\n 0% { transform: rotate(0deg); }\n"
+                },
+                {
+                    "date": 1755480336324,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -90,9 +90,9 @@\n   return (\n     <MessageWrapper className={className}>\n       <ContentWrapper>\n         <Header>\n-        <ProfileImage src={profileImage} alt={name} />\n+        <ProfileImage src={profileImage} alt={name} data-is-loading={isLoading} />\n           <h2>{name}</h2>\n         </Header>\n         <MessageContent>\n           {typeof content === 'string' ? <p>{content}</p> : content}\n"
+                }
+            ],
+            "date": 1755245290668,
+            "name": "Commit-0",
+            "content": "\"use client\";\n\nimport React from 'react';\nimport styled from 'styled-components';\n\nconst MessageWrapper = styled.div`\n  display: flex;\n  gap: 15px;\n  padding: 12px 0;\n  max-width: 800px;\n`;\n\nconst ProfileImage = styled.img`\n  width: 40px;\n  height: 40px;\n  border-radius: 50%;\n  object-fit: cover;\n`;\n\nconst ContentWrapper = styled.div`\n  flex: 1;\n`;\n\nconst Header = styled.div`\n  h2 {\n    font-size: 18px;\n    font-weight: 500;\n    line-height: 160%;\n    margin: 0 0 5px 0;\n    color: ${({ theme }) => theme.text};\n  }\n`;\n\nconst MessageContent = styled.div`\n  font-size: 14px;\n  line-height: 160%;\n  color: ${({ theme }) => theme.text};\n  white-space: pre-wrap;\n  \n  p {\n    margin: 0;\n  }\n`;\n\ninterface AiResponseMessageProps {\n  profileImage?: string;\n  name?: string;\n  content: string | React.ReactNode;\n  className?: string;\n}\n\nconst AiResponseMessage: React.FC<AiResponseMessageProps> = ({\n  profileImage = \"/ai-estimate/pretty.png\",\n  name = \"AI 컨설턴트\",\n  content,\n  className\n}) => {\n  return (\n    <MessageWrapper className={className}>\n      <ProfileImage src={profileImage} alt={name} />\n      <ContentWrapper>\n        <Header>\n          <h2>{name}</h2>\n        </Header>\n        <MessageContent>\n          {typeof content === 'string' ? <p>{content}</p> : content}\n        </MessageContent>\n      </ContentWrapper>\n    </MessageWrapper>\n  );\n};\n\nexport default AiResponseMessage;"
+        }
+    ]
+}

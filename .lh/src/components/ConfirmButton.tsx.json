@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 2,
+            "activePatchIndex": 3,
             "patches": [
                 {
                     "date": 1755151139935,
@@ -16,6 +16,10 @@
                 {
                     "date": 1755151491091,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -48,8 +48,9 @@\n \n       <Modal open={open} title={title} onClose={() => setOpen(false)} width={width} centerTitle>\n         <ContentWrapper>\n           <Description>{content}</Description>\n+          <SubText></SubText>\n           <Actions>\n             <PrimaryButton onClick={handleConfirm}>{confirmText}</PrimaryButton>\n             <SecondaryButton onClick={handleCancel}>{cancelText}</SecondaryButton>\n           </Actions>\n"
+                },
+                {
+                    "date": 1755246364190,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -45,12 +45,11 @@\n       <TriggerButton onClick={() => setOpen(true)} disabled={disabled}>\n         {buttonLabel}\n       </TriggerButton>\n \n-      <Modal open={open} title={title} onClose={() => setOpen(false)} width={width} centerTitle>\n+      <Modal open={open} title={title} onClose={() => setOpen(false)} width={width}>\n         <ContentWrapper>\n           <Description>{content}</Description>\n-          <SubText></SubText>\n           <Actions>\n             <PrimaryButton onClick={handleConfirm}>{confirmText}</PrimaryButton>\n             <SecondaryButton onClick={handleCancel}>{cancelText}</SecondaryButton>\n           </Actions>\n@@ -60,28 +59,35 @@\n   )\n }\n \n const TriggerButton = styled.button`\n-  height: 44px;\n+  justify-content:start;\n   padding: 0 20px;\n   border-radius: 8px;\n   border: none;\n   background: ${AppColors.primary};\n   color: #fff;\n   font-weight: 600;\n   cursor: pointer;\n \n+  width: 120px;\n+  height: 48px;\n+  border-radius: 6px;\n+  font-weight: bold;\n+  font-size: 16px;\n+\n   &:disabled { opacity: .6; cursor: not-allowed; }\n `\n \n const ContentWrapper = styled.div`\n-  padding: 8px 0 8px;\n+  padding: 12px 32px;\n `\n \n const Description = styled.p`\n-  margin: 12px 0 8px;\n+  margin: 12px 0 32px;\n   font-size: 16px;\n   color: ${AppColors.onSurface};\n+  white-space: pre-line;\n `\n \n const SubText = styled.p`\n   margin: 0 0 28px;\n@@ -91,15 +97,16 @@\n \n const Actions = styled.div`\n   display: flex;\n   gap: 16px;\n-  justify-content: center;\n+  justify-content: space-between;\n `\n \n const PrimaryButton = styled.button`\n   min-width: 140px;\n+  width: 45%;\n   height: 48px;\n-  border-radius: 10px;\n+  border-radius: 4px;\n   border: none;\n   background: #2E3040;\n   color: #ffffff;\n   font-weight: 700;\n@@ -108,10 +115,11 @@\n `\n \n const SecondaryButton = styled.button`\n   min-width: 140px;\n+    width:45%;\n   height: 48px;\n-  border-radius: 10px;\n+  border-radius: 4px;\n   border: 1px solid ${AppColors.borderLight};\n   background: #ffffff;\n   color: ${AppColors.onSurface};\n   font-weight: 700;\n@@ -119,4 +127,5 @@\n   cursor: pointer;\n `\n \n \n+\n"
                 }
             ],
             "date": 1755151139935,

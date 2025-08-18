@@ -1,0 +1,22 @@
+{
+    "sourceFile": "src/ai/prompts/index.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1755247234539,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1755247576897,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,8 @@\n import { systemPrompt } from './system';\n import { personaPrompt } from './persona';\n import { guidelinePrompt } from './guideline';\n+import { schemaPrompt } from './schema';\n \n export const combineSystemPrompts = () => {\n-  return `${systemPrompt}\\n\\n${personaPrompt}\\n\\n${guidelinePrompt}`;\n-};\n+  return `${systemPrompt}\\n\\n${personaPrompt}\\n\\n${guidelinePrompt}\\n\\n${schemaPrompt}`;\n+};\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1755247234539,
+            "name": "Commit-0",
+            "content": "import { systemPrompt } from './system';\nimport { personaPrompt } from './persona';\nimport { guidelinePrompt } from './guideline';\n\nexport const combineSystemPrompts = () => {\n  return `${systemPrompt}\\n\\n${personaPrompt}\\n\\n${guidelinePrompt}`;\n};\n"
+        }
+    ]
+}

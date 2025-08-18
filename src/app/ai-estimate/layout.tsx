@@ -1,4 +1,3 @@
-// src/app/ai-estimate/layout.tsx
 "use client";
 
 import React, { ReactNode } from 'react';
@@ -9,9 +8,8 @@ import { useThemeStore } from '@/store/themeStore';
 import BottomInput from '@/components/ai-esti/BottomInput';
 
 const LayoutWrapper = styled.div`
-  padding-top: 0px;
-  padding-bottom: calc(76px + env(safe-area-inset-bottom));
   min-height: 100vh;
+  padding-bottom: calc(76px + env(safe-area-inset-bottom));
   background-color: ${({ theme }) => theme.body};
 `;
 
@@ -110,21 +108,24 @@ export default function AiEstimateLayout({ children, inputPlaceholder, onInputSu
           <span className="icon"><Icon src={icons.profile} width={36} height={36} /></span>
         </div>
       </TopNav>
-      {React.Children.map(children, child => {
-        if (React.isValidElement<ChildWithThemeProps>(child)) {
-          return React.cloneElement(child, { toggleTheme, themeMode: isDarkMode ? 'dark' : 'light' });
-        }
-        return child;
-      })}
+      
+      <div style={{ paddingTop: '80px' }}>
+        {React.Children.map(children, child => {
+          if (React.isValidElement<ChildWithThemeProps>(child)) {
+            return React.cloneElement(child, { toggleTheme, themeMode: isDarkMode ? 'dark' : 'light' });
+          }
+          return child;
+        })}
+      </div>
 
       <ThemeToggleButton onClick={toggleTheme}>
         {isDarkMode ? '☀️' : '🌙'}
       </ThemeToggleButton>
+      
       <BottomInput 
-          placeholder={inputPlaceholder} 
-          onSubmit={onInputSubmit}
-          embedded
-        />
+        placeholder={inputPlaceholder} 
+        onSubmit={onInputSubmit}
+      />
     </LayoutWrapper>
   );
 }

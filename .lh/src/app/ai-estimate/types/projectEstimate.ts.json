@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/app/ai-estimate/types/projectEstimate.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1755247576894,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1755247576894,
+            "name": "Commit-0",
+            "content": "export interface ProjectEstimate {\n  project_name: string;\n  total_price: string;\n  vat_included_price: string;\n  estimated_period: string;\n  categories: Category[];\n}\n\nexport interface Category {\n  category_name: string;\n  sub_categories: SubCategory[];\n}\n\nexport interface SubCategory {\n  sub_category_name: string;\n  items: EstimateItem[];\n}\n\nexport interface EstimateItem {\n  name: string;\n  price: string;\n  description: string;\n}\n"
+        }
+    ]
+}

@@ -1,42 +1,127 @@
-'use client'
+"use client";
 
-import React from 'react'
-import styled from 'styled-components'
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import React, { ReactNode } from 'react';
+import styled from 'styled-components';
+import Icon from '@/components/ai-esti/Icon';
+import { useRouter } from 'next/navigation';
+import { useThemeStore } from '@/store/themeStore';
+import BottomInput from '@/components/ai-esti/BottomInput';
 
-const Tabs = styled.nav`
+const LayoutWrapper = styled.div`
+  min-height: 100vh;
+  padding-bottom: calc(76px + env(safe-area-inset-bottom));
+  background-color: ${({ theme }) => theme.body};
+`;
+
+const TopNav = styled.nav`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
   display: flex;
-  gap: 12px;
+  justify-content: space-between;
   align-items: center;
-  padding: 8px 16px;
+  padding: 12px 16px;
+  background-color: ${({ theme }) => theme.body};
+  border-bottom: 1px solid ${({ theme }) => theme.border};
+  z-index: 100;
+
+  .left-icons, .right-icons {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 0;
+    border-radius: 8px;
+
+    &:hover {
+      background-color: ${({ theme }) => `${theme.body}`};
+    }
+  }
+`;
+
+const ThemeToggleButton = styled.button`
+  position: fixed;
+  bottom: 120px;
+  right: 20px;
+  padding: 10px 15px;
+  border-radius: 20px;
   border: 1px solid ${({ theme }) => theme.border};
-  background: ${({ theme }) => theme.surface1};
-  border-radius: 8px;
-  margin: 8px auto 12px;
-  max-width: 960px;
-`
+  background-color: ${({ theme }) => theme.surface1};
+  color: ${({ theme }) => theme.text};
+  cursor: pointer;
+  font-weight: bold;
+  z-index: 1000;
+  
+  &:hover {
+    opacity: 0.8;
+  }
+`;
 
-const Tab = styled(Link)<{ $active?: boolean }>`
-  padding: 8px 12px;
-  border-radius: 6px;
-  color: ${({ theme, $active }) => ($active ? theme.body : theme.text)};
-  background: ${({ theme, $active }) => ($active ? theme.accent : 'transparent')};
-  font-weight: 600;
-  text-decoration: none;
-`
+interface AiEstimateLayoutProps {
+  children: ReactNode;
+  inputPlaceholder?: string;
+  onInputSubmit?: (value: string) => void;
+}
 
-export default function AiLayout({ children }: { children: React.ReactNode }) {
-  const pathname = usePathname()
-  const base = '/ai'
+interface ChildWithThemeProps {
+  toggleTheme?: () => void;
+  themeMode?: 'light' | 'dark';
+}
+
+export default function AiEstimateLayout({ children, inputPlaceholder, onInputSubmit }: AiEstimateLayoutProps) {
+  const router = useRouter();
+  const { isDarkMode, toggleTheme } = useThemeStore();
+
+  const isLightTheme = !isDarkMode;
+  const icons = {
+    back: '/ai-estimate/arrow_back.png',
+    share: isLightTheme ? '/ai-estimate/share.png' : '/ai-estimate/share_dark.png',
+    new: isLightTheme ? '/ai-estimate/new.png' : '/ai-estimate/new_dark.png',
+    estimate: isLightTheme ? '/ai-estimate/esti.png' : '/ai-estimate/esti_dark.png',
+    profile: isLightTheme ? '/ai-estimate/profile.png' : '/ai-estimate/profile_dark.png',
+  };
+
+  const handleBack = () => {
+    router.back();
+  };
+
   return (
-    <div style={{ padding: '8px 16px' }}>
-      <Tabs>
-        <Tab href={`${base}`} $active={pathname === base}>대화</Tab>
-        <Tab href={`${base}/history`} $active={pathname === `${base}/history`}>히스토리</Tab>
-        <Tab href={`${base}/settings`} $active={pathname === `${base}/settings`}>설정</Tab>
-      </Tabs>
-      {children}
-    </div>
+    <LayoutWrapper>
+      <TopNav>
+        <div className="left-icons">
+          <span className="icon" onClick={handleBack}>
+            <Icon src={icons.back} width={24} height={24} />
+          </span>
+        </div>
+        <div className="right-icons">
+          <span className="icon"><Icon src={icons.share} width={36} height={36} /></span>
+          <span className="icon"><Icon src={icons.new} width={36} height={36} /></span>
+          <span className="icon"><Icon src={icons.estimate} width={36} height={36} /></span>
+          <span className="icon"><Icon src={icons.profile} width={36} height={36} /></span>
+        </div>
+      </TopNav>
+      
+      <div style={{ paddingTop: '80px' }}>
+        {React.Children.map(children, child => {
+          if (React.isValidElement<ChildWithThemeProps>(child)) {
+            return React.cloneElement(child, { toggleTheme, themeMode: isDarkMode ? 'dark' : 'light' });
+          }
+          return child;
+        })}
+      </div>
+
+      <ThemeToggleButton onClick={toggleTheme}>
+        {isDarkMode ? '☀️' : '🌙'}
+      </ThemeToggleButton>
+      </LayoutWrapper>
+
   )
 }

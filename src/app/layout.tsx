@@ -13,26 +13,33 @@ import { ToastProvider } from "@/components/common/ToastProvider";
 import { PageLoaderProvider } from "@/contexts/PageLoaderContext";
 import { useSearchParams, usePathname } from "next/navigation";
 import { GlobalWrapper } from "./global-wrapper";
-
 import React from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
-// isCms 값에 따라 스타일을 동적으로 적용하도록 수정
-const Main = styled.main`
-
-  ${({ $isCms }) =>
-    $isCms
+const Main = styled.main<{ $hideDefault?: boolean }>`
+  ${({ $hideDefault }) =>
+    $hideDefault
       ? `
-      padding: 0;
-      min-height: auto;
-      background-color: #E6E7E9;
-    `
+      min-height: 100vh;
+      `
       : `
       padding: 76px 0 84px;
       min-height: 100vh;
-    `}
+      `}
 `;
+
+interface HeaderFooterProps {
+  isCompact?: boolean;
+}
+
+const HeaderWrapper = ({ isCompact }: HeaderFooterProps) => (
+  <Header compact={isCompact || false} />
+);
+
+const FooterWrapper = ({ isCompact }: HeaderFooterProps) => (
+  <Footer compact={isCompact || false} />
+);
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const { isDarkMode } = useThemeStore();
@@ -48,23 +55,26 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
   const theme = mounted ? (isDarkMode ? darkTheme : lightTheme) : lightTheme;
 
-  const isCms = pathname?.startsWith("/cms");
+  // 특정 경로에서는 기본 헤더/푸터를 숨김
+  const hideDefaultLayout = pathname?.startsWith("/cms") || 
+                          pathname?.startsWith("/ai") || 
+                          pathname?.startsWith("/ai-estimate");
 
   return (
     <html lang="ko">
       <body className={inter.className}>
         <StyledComponentsRegistry>
-        <GlobalWrapper>
-          <ThemeProvider theme={theme}>
-            <GlobalStyle />
-            <PageLoaderProvider>
-              <ToastProvider>
-                {!isCms && <Header compact={compact} />}
-                <Main $isCms={isCms}>{children}</Main>
-                {!isCms && <Footer compact={compact} />}
-              </ToastProvider>
-            </PageLoaderProvider>
-          </ThemeProvider>
+          <GlobalWrapper>
+            <ThemeProvider theme={theme}>
+              <GlobalStyle />
+              <PageLoaderProvider>
+                <ToastProvider>
+                  {!hideDefaultLayout && <HeaderWrapper isCompact={compact} />}
+                  <Main $hideDefault={hideDefaultLayout}>{children}</Main>
+                  {!hideDefaultLayout && <FooterWrapper isCompact={compact} />}
+                </ToastProvider>
+              </PageLoaderProvider>
+            </ThemeProvider>
           </GlobalWrapper>
         </StyledComponentsRegistry>
       </body>
